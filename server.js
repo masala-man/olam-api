@@ -31,9 +31,18 @@ router.get('/', function(req, res) {
 });
 
 // set routes
-router.route('/define/:english_word')
+router.route('/define/en/:english_word')
 .get(function(req, res) {
 	Word.find({ "english_word": req.params.english_word}, function(err, result) {
+		if (err)
+			res.send(err);
+		console.log(result)
+		res.json(result);
+	});
+})
+router.route('/define/ml/:malayalam_word')
+.get(function(req, res) {
+	Word.find({ "malayalam_definition": req.params.malayalam_word}, function(err, result) {
 		if (err)
 			res.send(err);
 		console.log(result)
