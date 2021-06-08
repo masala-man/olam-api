@@ -6,6 +6,7 @@ var mongoose   = require('mongoose');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 var port = process.env.PORT || 8080;
+var mongoURL = process.env.MONGO || 'mongodb://localhost:27017'
 
 // avoid deprecation warnings
 mongoose.set('useNewUrlParser', true);
@@ -14,7 +15,7 @@ mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 
 //connect to database
-mongoose.connect('mongodb://localhost:27017/olam');
+mongoose.connect(`${mongoURL}/olam`);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
